@@ -1,0 +1,25 @@
+Revision history for Test-And-Output
+
+v0.001_001 2012-04-09 10:44:16 America/Los_Angeles
+
+Initial Release
+
+v0.001_003 2012-04-09 14:56:26 America/Los_Angeles
+
+Fixed a few incorrectly named Smart::Comments variables
+
+v0.003_001 2012-04-13 08:31:32 America/Los_Angeles
+
+A complete rewrite of the guts since I got frustrated 
+troubleshooting the issues associated with some filehandle 
+miss-handling.
+
+I also removed the dies_ok method from my module since I 
+couldn't figure out how to pass code back an forth without 
+having it execute before it was inside the eval block.
+
+
+v0.003_003 2012-04-14 23:29:02 America/Los_Angeles
+
+Simplified the description and finished running tests with 
+the updated guts for Data::Walk::Extracted.

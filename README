@@ -1,0 +1,57 @@
+This module may help if
+
+* You want to test the result of a function and still test the associated print 
+(warning?) output
+
+* You were hoping to get a test case per output line instead of a single 'is_deeply' 
+compare
+
+* You are addicted to Smart::Comments and test driven development so you don't 
+want the Smart Comments captured while running the tests for STDOUT captures.  
+(Smart::Comments are sent to STDERR)  This way you can write code and get 
+Smart::Comments prior to fully complete functionality while still testing for 
+correct STDOUT output when running early tests.
+
+* You're strangly attracted to an OO testing interface (why????)
+
+* You are looking for a Moose Testing class that you can leverage to test 
+content in a global variable without writing the thing from scratch.
+
+At this point if something didn't ring true I would encourage you to review 
+Test::Output or as a minimum check out the perl man page dealing with 'open' 
+and review the section "To (re)open STDOUT or STDERR as an in-memory file".
+
+This is indeed a Moose based OO testing Class.  It is dependency heavy.  Your 
+test calls will require '->'.  The module is NOT mature.  These arn't the droids 
+your looking for...
+
+Additionally there is a small issue with a tautology trap since the testfile 
+is testing the output of output testing.  I have already found cases where the 
+test coverage didn't capture all the bugs in the module.  I did fix the bugs and 
+added a test case but that doesn't mean that all case were identified.  
+Specifically if the output wanders to some third place from either the buffer 
+or the screen then i don't know how to throw an alarm.
+
+Build from Source - (for example git)
+	
+	Download a compressed file with the code
+	
+	Extract the code from the compressed file
+
+	Change into the extracted directory
+
+	(For Windows find what version of make was used to compile your perl)
+  		perl  -V:make
+
+	Then
+
+	>perl Makefile.PL
+
+	>make
+
+	>make test
+
+	>make install
+
+	>make clean
+	(use the windows make version as appropriate (nmake?))

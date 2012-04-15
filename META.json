@@ -1,0 +1,50 @@
+{
+   "abstract" : "Capture output during other tests\r",
+   "author" : [
+      "Jed Lund <jandrew@cpan.org>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Dist::Zilla version 4.300009, CPAN::Meta::Converter version 2.113640",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Test-And-Output",
+   "prereqs" : {
+      "configure" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : "6.30"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Carp" : 0,
+            "Moose" : 0,
+            "MooseX::NonMoose" : 0,
+            "MooseX::StrictConstructor" : 0,
+            "MooseX::Types::Moose" : 0,
+            "Smart::Comments" : 0,
+            "Test::Builder::Module" : 0,
+            "YAML::Any" : 0,
+            "perl" : "5.008",
+            "strict" : 0,
+            "version" : "0.94"
+         }
+      },
+      "test" : {
+         "requires" : {
+            "Modern::Perl" : 0,
+            "Test::Exception" : 0,
+            "Test::Moose" : 0,
+            "Test::More" : 0,
+            "Test::Most" : 0
+         }
+      }
+   },
+   "release_status" : "testing",
+   "version" : "v0.003_003"
+}
+
