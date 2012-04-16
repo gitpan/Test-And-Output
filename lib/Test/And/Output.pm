@@ -8,7 +8,7 @@ extends 'Test::Builder::Module';
 use MooseX::StrictConstructor;
 use Smart::Comments -ENV;#'###'
 ### Smart-Comments turned on for Test-And-Output
-use version 0.94; our $VERSION = qv('0.003_003');
+use version 0.94; our $VERSION = qv('0.003_005');
 use Carp;
 use MooseX::Types::Moose qw(
         ScalarRef

@@ -18,8 +18,13 @@ I also removed the dies_ok method from my module since I
 couldn't figure out how to pass code back an forth without 
 having it execute before it was inside the eval block.
 
-
 v0.003_003 2012-04-14 23:29:02 America/Los_Angeles
 
 Simplified the description and finished running tests with 
 the updated guts for Data::Walk::Extracted.
+
+v0.003_005 2012-04-16 14:19:09 America/Los_Angeles
+
+Simplified the description and updated the test  
+to try and pass some failing CPAN Testers reports for 
+perl 5.10 and BSD.

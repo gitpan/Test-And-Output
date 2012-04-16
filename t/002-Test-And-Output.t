@@ -53,7 +53,7 @@ $test_inst->buffer_count( 1, 'STDOUT',                  "... check if the 'STDOU
 ok print( "Foo, Bar, Baz\n" ),                          "Test printing 'Foo, Bar, Baz'";
 $test_inst->cant_match_output( 'STDOUT', 'Foo, Bar, Baz',
                                                         "Test that 'Foo, Bar, Baz' was (NOT) captured in the print buffer" );
-$test_inst->buffer_count( 1, 'STDOUT',                  "... check if the 'STDOUT' buffer (still) has the expected number of lines" );
+$test_inst->buffer_count( 1, 'STDOUT',    "... check if the 'STDOUT' buffer (still) has the expected number of lines" );
 $test_inst->match_output( 'STDOUT', qr/Hello\sW/,       "Test that 'Hello World' or a close match was captured" );
 $test_inst->buffer_count( 0, 'STDOUT',                  "... check that the 'STDOUT' buffer has one fewer lines" );
 $test_inst->close_buffer( 'STDOUT',                     "Test closing the 'STDOUT' buffer" );
@@ -63,9 +63,10 @@ $test_inst->return_to_screen( 'STDOUT',                 "... and return 'STDOUT'
 $test_inst->cant_match_output( 'STDERR', qr/Watch out\sW/,       
                                                         "Test that 'Watch out World!' or a close match was (NOT) captured" );
 $test_inst->capture_output( 'STDERR',                   "Test turning on the capture for STDERR" );
+$expected_count = ( $test_inst->get_buffer( 'STDERR' ) );
 ok warn( "Watch out World!" ),                          "Test capturing 'Watch out World!'";
+$expected_count++;
 $test_inst->return_to_screen( 'STDERR',                 "Test turning off the capture for STDERR" );
-$expected_count = 1;
 $test_inst->buffer_count( $expected_count, 'STDERR',    "... check if the 'STDERR' buffer has the expected number of lines" );
 ok warn( "Foo, Bar, Baz" ),                             "Test warning 'Foo, Bar, Baz'";
 $test_inst->cant_match_output( 'STDERR', 'Foo, Bar, Baz',
@@ -83,9 +84,10 @@ $test_inst->buffer_count( $expected_count, 'STDERR',    "... check that the 'STD
 $test_inst->clear_buffer( 'STDERR',                     "Test clearing the 'STDERR' buffer" );
 ### Testing croak and carp...
 $test_inst->capture_output( 'STDERR',                   "Test turning on the capture for STDERR" );
+$expected_count = ( $test_inst->get_buffer( 'STDERR' ) );
 ok carp( "Grumpity Grumpity Grumpity" ),                "Test capturing 'Grumpity Grumpity Grumpity'";
+$expected_count++;
 $test_inst->return_to_screen( 'STDERR',                  "Test turning off the capture for STDERR" );
-$expected_count = 1;
 $test_inst->buffer_count( $expected_count, 'STDERR',    "... check if the 'STDERR' buffer has the expected number of lines" );
 ok carp( "Foo, Bar, Baz" ),                             "Test carping 'Foo, Bar, Baz'";
 $test_inst->cant_match_output( 'STDERR', 'Foo, Bar, Baz',
@@ -100,15 +102,16 @@ $test_inst->clear_buffer( 'STDERR',                     "Test clearing the 'STDE
 $test_inst->cant_match_output( 'STDERR', "You can’t win, Darth. If you strike me down, I shall become more powerful than you can possibly imagine.",       
                                                         "Test that Obi-wans last corporeal words were (NOT) captured" );
 $test_inst->capture_output( 'STDERR',                   "Test turning on the capture for STDERR" );
+$expected_count = ( $test_inst->get_buffer( 'STDERR' ) );
 dies_ok{ croak "You can’t win, Darth. If you strike me down, I shall become more powerful than you can possibly imagine."}          
                                                         "Die with Obi-wan's last corporeal words";
-ok warn( @$ ),                                           "Capture the words for testing";
+ok warn( @$ ),                                          "Capture the words for testing";
 dies_ok{ live_or_die( 'die', 'This is a test death' ) } "Test dieing by subroutine";
-ok warn( @$ ),                                           "Capture the words for testing";
+ok warn( @$ ),                                          "Capture the words for testing";
 lives_ok{ live_or_die( 'live', 'Princess Padme Amidala, you now have the floor.' ) }
                                                         "Test carping by subroutine";
+$expected_count += 10;
 $test_inst->return_to_screen( 'STDERR',                 "Test turning off the capture for STDERR" );
-$expected_count = 10;
 $test_inst->buffer_count( $expected_count, 'STDERR',    "... check if the 'STDERR' buffer has the expected number of lines" );
 dies_ok{ croak "Foo, Bar, Baz" }                        "Test croaking 'Foo, Bar, Baz'";
 ok warn( @$ ),                                          "Send output to 'STDERR' for testing";
